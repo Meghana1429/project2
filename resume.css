@@ -1,0 +1,27 @@
+body{
+	background:pink;
+}
+.maindiv{
+	display:flex;
+	justify-content: center;
+	margin:3%;
+}
+.leftdiv{
+	background:#752555;
+	margin:2%;
+	border-radius:5%;
+	text-align: center;
+	box-shadow: 2px 2px 2px 2px;
+	width:98%;
+	height:40%;
+}
+.rightdiv{
+	background:#D2D3F3;
+	margin-right: 7%;
+	margin: 4%;
+	border-radius:5%;
+	box-shadow: 4px 4px 4px 4px;
+	width:92%;
+	padding:3%;
+}
+

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>resume form</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body id="form">
+	<div class="main">
+	<div class="sub">
+		<h1>Career Qbjective</h1>
+		<select id="career" name="career">
+			<option>Select Career Objective</option>
+			<option>To Work in an environment where i can learn new things</option>
+			<option>To work in Infosys</option>
+			<option>To start a Software Company</option>
+		</select>
+
+    </div>
+    <div class="sub-1">
+<h2>Personal Information</h2>
+           <input type="text" name="name" placeholder="Enter your name"id="name"><br>
+           <input type="number" name="mobile" placeholder="Enter your mobile number"id="mobile"><br>
+           <input type="email" name="email" placeholder="Enter your email"id="email"><br>
+</div>
+    <div class="sub-1">
+<h2>PG DETAILS</h2>
+    <select id="pdegree" name="pdegree">
+	       <option>Degree</option>
+	       <option>M.Tech</option>
+	       <option>MCA</option>
+	       <option>MBA</option>
+    </select>
+           <input type="text" name="pinst" id="pinst" placeholder="Enter your institute"><br>
+  	       <input type="number" name="pper" id="pper" placeholder="Enter your percentage"><br>
+	       <input type="text" name="pyear" id="pyear" placeholder="Enter your yop">
+
+    </div>
+    <div class="sub-1">
+<h2>UG DETAILS</h2>
+    <select id="gdegree"name="pdegree">
+	       <option>Degree</option>
+	       <option>B.Tech</option>
+	       <option>BSC</option>
+   </select><br>
+           <input type="text" name="ginst" id="ginst" placeholder="Enter your institute"><br>
+           <input type="number" name="gper"id="gper" placeholder="Enter your percentage "><br>
+           <input type="text" name="gyear"id="gyear" placeholder="Enter your yop"><br>
+
+    </div>
+    <div class="sub-1">
+ <h2>INTERMEDIATE DETAILS</h2>
+    <select id="idegree"name="idegree">
+ 	       <option>MPC</option>
+ 	       <option>BIPC</option>
+ 	       </select><br>
+           <input type="text" name="iinst" id="iinst" placeholder="Enter your institute"><br>
+       <input type="number" name="iper"id="iper" placeholder="Enter your percentage "><br>
+       <input type="text" name="iyear"id="iyear" placeholder="Enter your yop"><br>
+
+    </div>
+    <div class="sub-1">
+    <h2>10th Details</h2>
+    <select id="sdegree"name="sdegree">
+    	<option>SSC</option>
+    	<OPTION>CBSE</OPTION>
+    	<OPTION>ICSE</OPTION>
+    	
+    </select><br>
+ <input type="text" name="sinst" id="sinst" placeholder="Enter your institute"><br>
+<input type="number" name="sper"id="sper" placeholder="Enter your percentage "><br>
+<input type="text" name="syear"id="syear" placeholder="Enter your yop"><br>
+
+  </div>
+   </div>
+
+<button type="button" id="button" name="button" onclick="submitdata()">Submit</button>
+</body>
+</html>
+<script type="text/javascript">
+	function submitdata(){
+
+	var car=document.getElementById("career").value;
+	var details=document.getElementById("name").value;
+	var mobile=document.getElementById("mobile").value;
+	var mail=document.getElementById("email").value;
+
+	var pdegree=document.getElementById("pdegree").value;
+	var pinst=document.getElementById("pinst").value;
+	var pper=document.getElementById("pper").value;
+	var pyear=document.getElementById("pyear").value;
+
+	var gdegree=document.getElementById("gdegree").value;
+	var ginst=document.getElementById("ginst").value;
+	var gper=document.getElementById("gper").value;
+	var gyear=document.getElementById("gyear").value;
+
+	var idegree=document.getElementById("idegree").value;
+	var iinst=document.getElementById("iinst").value;
+	var iper=document.getElementById("iper").value;
+	var iyear=document.getElementById("iyear").value;
+
+	var sdegree=document.getElementById("sdegree").value;
+	var sinst=document.getElementById("sinst").value;
+	var sper=document.getElementById("sper").value;
+	var syear=document.getElementById("syear").value;
+
+	var indexedDB=window.indexedDB || window.mozIndexedDB || window.msIndexedDB || window.webkitIndexedDB;
+var store;
+var open;
+var result;
+var tx;
+	     var request=indexedDB.open("database",1);
+
+	     request.onupgradeneeded=function(e) {
+            open = e.target.result;
+            store = open.createObjectStore("resumedata",{keyPath:"name"});   
+	     }
+	     request.onerror=function(e){
+	     	console.log("error"+e);
+}
+	    
+	     request.onsuccess=function(e){
+	        open = e.target.result;
+	        tx = open.transaction("resumedata",'readwrite');
+	        store = tx.objectStore("resumedata");
+            store.put({
+	        	career:car,
+	        	name:details,
+	        	phone:mobile,
+	        	email:mail,
+	        	education:[
+	        	{
+                       degree:pdegree,
+                       inst:pinst,
+                       per:pper,
+                       year:pyear
+                       	        	
+                },
+                {    
+                       degree:gdegree,
+                       inst:ginst,
+                       per:gper,
+                       year:gyear
+                },
+                {
+
+                       degree:idegree,
+                       inst:iinst,
+                       per:iper,
+                       year:iyear
+                },
+                {
+
+                       degree:sdegree,
+                       inst:sinst,
+                       per:sper,
+                       year:syear
+                }
+            ]
+	       } );	
+	     }
+	 
+	 window.open("index.html","_self");
+	}
+</script>
